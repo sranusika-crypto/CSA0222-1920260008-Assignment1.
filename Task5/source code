@@ -1,1 +1,32 @@
 
+#include <stdio.h>
+
+#define DEBUG
+
+#ifdef DEBUG
+    #define DEBUG_PRINT(message) printf("DEBUG: %s\n", message)
+#else
+    #define DEBUG_PRINT(message)
+#endif
+
+int main(void)
+{
+    int units = 150;
+    int rate = 225;
+
+    DEBUG_PRINT("Billing program started");
+
+    printf("Units consumed: %d\n", units);
+    printf("Rate per unit: %d paise\n", rate);
+
+    long energy_charge = (long)units * rate;
+
+    printf("Energy charge: Rs %ld.%02ld\n",
+           energy_charge / 100,
+           energy_charge % 100);
+
+    DEBUG_PRINT("Billing calculation completed");
+
+    return 0;
+}
+
