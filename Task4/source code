@@ -1,1 +1,26 @@
 
+#include <stdio.h>
+
+#define SQUARE(x) ((x) * (x))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+static inline int square_function(int x)
+{
+    return x * x;
+}
+
+int main(void)
+{
+    int a = 5;
+    int b = 8;
+
+    printf("Square of %d using macro = %d\n", a, SQUARE(a));
+
+    printf("Maximum of %d and %d = %d\n", a, b, MAX(a, b));
+
+    printf("Square using inline function = %d\n",
+           square_function(a));
+
+    return 0;
+}
+
