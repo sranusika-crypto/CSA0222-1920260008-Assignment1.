@@ -1,1 +1,81 @@
 
+#include <stdio.h>
+#include <limits.h>
+
+#define SLAB1_UNITS 100
+#define SLAB2_UNITS 200
+
+#define RATE1_PAISE 0
+#define RATE2_PAISE 225
+#define RATE3_PAISE 450
+
+#define FIXED_CHARGE_PAISE 5000LL
+
+typedef unsigned short meter_t;
+
+unsigned int calculate_units(meter_t previous, meter_t current)
+{
+    return (unsigned short)(current - previous);
+}
+
+long long calculate_bill(unsigned int units)
+{
+    long long energy_charge = 0;
+
+    if (units > SLAB1_UNITS)
+    {
+        if (units <= SLAB2_UNITS)
+        {
+            energy_charge =
+                (long long)(units - SLAB1_UNITS) * RATE2_PAISE;
+        }
+        else
+        {
+            energy_charge =
+                (long long)(SLAB2_UNITS - SLAB1_UNITS) * RATE2_PAISE;
+
+            energy_charge +=
+                (long long)(units - SLAB2_UNITS) * RATE3_PAISE;
+        }
+    }
+
+    return energy_charge + FIXED_CHARGE_PAISE;
+}
+
+int main(void)
+{
+    meter_t previous = 1200;
+    meter_t current = 1550;
+
+    unsigned int units = calculate_units(previous, current);
+    long long bill = calculate_bill(units);
+
+    printf("===== FINAL BILLING SYSTEM =====\n");
+
+    printf("Previous reading : %hu\n", previous);
+    printf("Current reading  : %hu\n", current);
+    printf("Units consumed   : %u\n", units);
+
+    printf("Energy charge    : Rs %lld.%02lld\n",
+           (bill - FIXED_CHARGE_PAISE) / 100,
+           (bill - FIXED_CHARGE_PAISE) % 100);
+
+    printf("Fixed charge     : Rs 50.00\n");
+
+    printf("Total bill       : Rs %lld.%02lld\n",
+           bill / 100, bill % 100);
+
+    printf("\n===== SYSTEM RECOMMENDATIONS =====\n");
+    printf("1. Use unsigned short for meter readings.\n");
+    printf("2. Use long long for large money totals.\n");
+    printf("3. Store money in integer paise.\n");
+    printf("4. Use macros for fixed tariff values.\n");
+    printf("5. Validate all user inputs.\n");
+    printf("6. Test meter rollover conditions.\n");
+
+    printf("\nSize of meter type: %zu bytes\n", sizeof(meter_t));
+    printf("Maximum meter value: %u\n", (unsigned)USHRT_MAX);
+
+    return 0;
+}
+
