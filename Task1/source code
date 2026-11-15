@@ -1,1 +1,84 @@
+1. Introduction
+The Grama Jyothi Rural Electricity Co-operative provides electricity to approximately 4,000 households. The organisation requires a reliable C program to calculate monthly electricity bills based on the previous and current meter readings.
 
+The program calculates the electricity units consumed, energy charges, fixed charges and total bill amount. The main objective is to avoid incorrect calculations, negative bills and tariff errors.
+2. Identification of Input Data
+The program requires the following input values:
+1. Household Number: A unique identification number assigned to each household to identify the consumer.
+2. Previous Reading: The electricity meter reading recorded during the previous month.
+3. Current Reading: The latest electricity meter reading recorded during the current month.
+4. Category: Identifies the type of electricity connection or consumer category.
+These inputs are necessary to calculate the electricity consumption and prepare the monthly bill for each household.
+3. Identification of Output Data
+The program produces the following output values:
+1. Units Consumed: Calculated by finding the difference between the current and previous meter readings.
+2. Energy Charge: Calculated according to the electricity consumption and applicable tariff slabs.
+3. Fixed Charge: A fixed amount of Rs. 50 added to every household's bill.
+4. Total Bill: The final amount calculated by adding the energy charge and fixed charge.
+Formula:
+
+Units Consumed = Current Reading − Previous Reading
+
+Total Bill = Energy Charge + Fixed Charge
+
+The electricity tariff is calculated as follows:
+- First 100 units – Free.
+- 101 to 200 units – Rs. 2.25 per unit.
+- Above 200 units – Rs. 4.50 per unit.
+- Fixed charge – Rs. 50.
+4. Identification of Constants
+Constants are values that remain unchanged during program execution. The following values are considered constants in this billing program:
+1. First slab limit – 100 units.
+2. Second slab limit – 200 units.
+3. First slab rate – Rs. 0 per unit.
+4. Second slab rate – Rs. 2.25 per unit.
+5. Third slab rate – Rs. 4.50 per unit.
+6. Fixed charge – Rs. 50.
+7. Maximum meter reading – 65535.
+These values can be defined using the #define preprocessor directive in C. If the electricity tariff changes, the values can be modified in one place without changing the entire program.
+5. Nature of Data Values
+The data used in the billing program has different characteristics.
+1. Household number is a positive integer used to identify each consumer.
+2. Previous reading and current reading are non-negative integer values.
+3. Units consumed are non-negative integer values.
+4. Energy charge may contain fractional values because the electricity tariff includes paise.
+5. Fixed charge is a constant amount of Rs. 50.
+6. Total bill may contain rupees and paise.
+7. The total number of bills processed may become very large when the system expands from a village to a district.
+For accurate calculations, money should preferably be stored in paise instead of floating-point rupees.
+6. Rules and Conditions for Correct Billing
+The billing program must satisfy the following conditions:
+1. The electricity bill should never be negative.
+2. Previous and current meter readings must be valid.
+3. Units consumed must be calculated correctly.
+4. The first 100 units must be charged at zero rate.
+5. Units from 101 to 200 must be charged at Rs. 2.25 per unit.
+6. Units above 200 must be charged at Rs. 4.50 per unit.
+7. A fixed charge of Rs. 50 must be added to every bill.
+8. The total bill must equal the sum of the energy charge and fixed charge.
+9. Meter rollover from 65535 to 0 must be handled correctly.
+10. All calculations must maintain accuracy up to the nearest paisa.
+7. Assumptions
+The following assumptions are considered while designing the program:
+1. Every household has a unique household number.
+2. Each household has one electricity meter.
+3. The meter is a 16-bit unsigned counter with a maximum reading of 65535.
+4. Meter readings are recorded correctly every month.
+5. The fixed charge is Rs. 50 for every household.
+6. The tariff rates remain unchanged during one billing period.
+7. Invalid meter readings are rejected by the program.
+8. If the meter rolls over, electricity consumption is calculated using unsigned 16-bit arithmetic.
+8. Alternative Concept and Complexity Analysis
+Meter readings can be stored either as integers or as character strings.
+- Meter readings are stored as character sequences.
+- Conversion is required before performing mathematical calculations.
+- Comparison requires checking individual characters.
+- If the number of digits is d, conversion and comparison take O(d) time.
+- Space complexity is O(d) per reading.
+Analysis:
+
+Integer representation is more suitable for electricity meter readings because it allows direct mathematical calculations and comparisons. String representation requires additional conversion before calculations can be performed.
+
+Therefore, integer representation is selected because it requires less storage and supports faster calculations.
+9. Conclusion
+The Grama Jyothi electricity billing problem requires proper identification of input data, output data, constants and calculation rules. Integer representation is selected for meter readings because it supports faster calculations and comparisons. The program must also handle meter rollover and maintain accurate billing calculations. This analysis provides the foundation for developing a reliable and efficient C billing program.
