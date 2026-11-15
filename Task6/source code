@@ -1,1 +1,49 @@
 
+#include <stdio.h>
+
+int main(void)
+{
+    int household_number;
+    unsigned int units;
+    long energy_charge_paise;
+    char category;
+
+    printf("Enter household number: ");
+    if (scanf("%d", &household_number) != 1)
+    {
+        printf("Invalid household number!\n");
+        return 1;
+    }
+
+    printf("Enter units consumed: ");
+    if (scanf("%u", &units) != 1)
+    {
+        printf("Invalid units!\n");
+        return 1;
+    }
+
+    printf("Enter energy charge in paise: ");
+    if (scanf("%ld", &energy_charge_paise) != 1)
+    {
+        printf("Invalid energy charge!\n");
+        return 1;
+    }
+
+    printf("Enter category (D/C): ");
+    if (scanf(" %c", &category) != 1)
+    {
+        printf("Invalid category!\n");
+        return 1;
+    }
+
+    printf("\n----- ELECTRICITY BILL -----\n");
+    printf("Household Number : %d\n", household_number);
+    printf("Units Consumed   : %u\n", units);
+    printf("Energy Charge    : Rs %ld.%02ld\n",
+           energy_charge_paise / 100,
+           energy_charge_paise % 100);
+    printf("Category         : %c\n", category);
+
+    return 0;
+}
+
