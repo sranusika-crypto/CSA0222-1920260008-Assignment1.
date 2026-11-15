@@ -35,18 +35,18 @@ To execute the compiled program on Windows:
 
 | Task | Description | Result |
 |---|---|---|
-| Task 01 | Problem Analysis and Data Identification | Pending |
-| Task 02 | Selection of Data Types | Pending |
-| Task 03 | Defining Constants | Pending |
-| Task 04 | Safe Use of Macros | Pending |
-| Task 05 | Header Files and Conditional Compilation | Pending |
-| Task 06 | Formatted Input and Output | Pending |
-| Task 07 | Type Conversion and Precision | Pending |
-| Task 08 | Compilation Process | Pending |
-| Task 09 | Billing Program Implementation and Testing | Pending |
-| Task 10 | Expected vs Actual Results | Pending |
-| Task 11 | Final Design Recommendation | Pending |
-| Task 12 | Smart-Meter Design Challenge | Pending |
+| Task 01 | Problem Analysis and Data Identification | COMPLETED |
+| Task 02 | Selection of Data Types | COMPLETED |
+| Task 03 | Defining Constants | COMPLETED |
+| Task 04 | Safe Use of Macros | COMPLETED |
+| Task 05 | Header Files and Conditional Compilation | COMPLETED |
+| Task 06 | Formatted Input and Output | COMPLETED |
+| Task 07 | Type Conversion and Precision |COMPLETED |
+| Task 08 | Compilation Process | COMPLETED|
+| Task 09 | Billing Program Implementation and Testing | COMPLETED |
+| Task 10 | Expected vs Actual Results | COMPLETED |
+| Task 11 | Final Design Recommendation | COMPLETED |
+| Task 12 | Smart-Meter Design Challenge | COMPLETED|
 
 ## Folder Structure
 
@@ -54,15 +54,15 @@ Each task has a separate folder containing its source code, required input files
 
 ```text
 Assignment1/
-├── Task01/
-├── Task02/
-├── Task03/
-├── Task04/
-├── Task05/
-├── Task06/
-├── Task07/
-├── Task08/
-├── Task09/
+├── Task1/
+├── Task2/
+├── Task3/
+├── Task4/
+├── Task5/
+├── Task6/
+├── Task7/
+├── Task8/
+├── Task9/
 ├── Task10/
 ├── Task11/
 ├── Task12/
