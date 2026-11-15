@@ -13,7 +13,7 @@ Electricity Co-operative
 ## Compiler Details
 
 - **Compiler:** GCC (GNU Compiler Collection)
-- **Compiler Version:** [Enter your installed GCC version]
+- **Compiler Version:** 16.2.0
 - **Editor:** Visual Studio Code
 - **Operating System:** Windows
 
