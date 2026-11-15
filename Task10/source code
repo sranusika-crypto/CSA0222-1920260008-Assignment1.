@@ -1,1 +1,48 @@
 
+#include <stdio.h>
+#include <limits.h>
+
+#define HOUSEHOLDS_1 4000
+#define HOUSEHOLDS_2 60000
+#define HOUSEHOLDS_3 800000
+
+#define BILL_PAISE 95000L
+
+int main(void)
+{
+    int households[] = {
+        HOUSEHOLDS_1,
+        HOUSEHOLDS_2,
+        HOUSEHOLDS_3
+    };
+
+    printf("===== LARGE SCALE BILLING ANALYSIS =====\n\n");
+
+    printf("Size of int       : %zu bytes\n", sizeof(int));
+    printf("Size of long      : %zu bytes\n", sizeof(long));
+    printf("Size of long long : %zu bytes\n\n", sizeof(long long));
+
+    printf("Maximum int       : %d\n", INT_MAX);
+    printf("Maximum long long : %lld\n\n", LLONG_MAX);
+
+    for (int i = 0; i < 3; i++)
+    {
+        long long total_paise =
+            (long long)households[i] * BILL_PAISE;
+
+        double total_rupees =
+            (double)households[i] * 950.00;
+
+        printf("Households: %d\n", households[i]);
+
+        printf("Integer paise total: Rs %lld.%02lld\n",
+               total_paise / 100,
+               total_paise % 100);
+
+        printf("Double rupees total: Rs %.2f\n\n",
+               total_rupees);
+    }
+
+    return 0;
+}
+
