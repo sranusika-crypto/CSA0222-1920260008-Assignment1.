@@ -1,20 +1,107 @@
+
 #include <stdio.h>
-#include <limits.h>
 
-typedef unsigned short meter_t;
-
-unsigned int consumption(meter_t previous, meter_t current)
-{
-    return (unsigned short)(current - previous);
-}
+#define MAX_READINGS 35040
+#define PEAK_MULTIPLIER 120
+#define NORMAL_MULTIPLIER 100
+#define FIXED_CHARGE_PAISE 5000
 
 int main(void)
 {
-    printf("sizeof(meter_t) = %zu bytes, maximum reading = %u\n",
-           sizeof(meter_t), (unsigned)USHRT_MAX);
+    FILE *file;
+    int rate, fixed_charge;
+    int n, hour, minute, wh;
+    int i;
 
-    printf("Consumption: %u units\n", consumption(1200, 1530));
-    printf("Consumption: %u units\n", consumption(65400, 120));
+    long long total_wh = 0;
+    long long cost_numerator = 0;
+    long long energy_paise, total_paise;
+
+    /* Read tariff values from a file */
+    file = fopen("tariff.txt", "r");
+
+    if (file == NULL)
+    {
+        printf("Cannot open tariff.txt\n");
+        return 1;
+    }
+
+    if (fscanf(file, "%d %d", &rate, &fixed_charge) != 2)
+    {
+        printf("Invalid tariff file!\n");
+        fclose(file);
+        return 1;
+    }
+
+    fclose(file);
+
+    if (rate < 0 || fixed_charge < 0)
+    {
+        printf("Invalid tariff values!\n");
+        return 1;
+    }
+
+    printf("Enter number of 15-minute readings: ");
+
+    if (scanf("%d", &n) != 1 || n < 1 || n > MAX_READINGS)
+    {
+        printf("Invalid number of readings!\n");
+        return 1;
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        printf("\nReading %d\n", i + 1);
+
+        printf("Enter hour, minute and watt-hours: ");
+
+        if (scanf("%d %d %d", &hour, &minute, &wh) != 3)
+        {
+            printf("Invalid reading!\n");
+            return 1;
+        }
+
+        if (hour < 0 || hour > 23 ||
+            minute < 0 || minute > 59 ||
+            (minute % 15 != 0) || wh < 0)
+        {
+            printf("Invalid reading values!\n");
+            return 1;
+        }
+
+        total_wh += wh;
+
+        /* Peak hours: 6 PM to before 10 PM */
+        if (hour >= 18 && hour < 22)
+        {
+            cost_numerator +=
+                (long long)wh * rate * PEAK_MULTIPLIER;
+        }
+        else
+        {
+            cost_numerator +=
+                (long long)wh * rate * NORMAL_MULTIPLIER;
+        }
+    }
+
+    /* Convert watt-hours and paise into paise */
+    energy_paise = (cost_numerator + 50000) / 100000;
+
+    total_paise = energy_paise + fixed_charge;
+
+    printf("\n===== SMART METER BILL =====\n");
+
+    printf("Total readings : %d\n", n);
+    printf("Total energy   : %lld Wh\n", total_wh);
+
+    printf("Energy charge  : Rs %lld.%02lld\n",
+           energy_paise / 100, energy_paise % 100);
+
+    printf("Fixed charge   : Rs %d.%02d\n",
+           fixed_charge / 100, fixed_charge % 100);
+
+    printf("Total bill     : Rs %lld.%02lld\n",
+           total_paise / 100, total_paise % 100);
 
     return 0;
 }
