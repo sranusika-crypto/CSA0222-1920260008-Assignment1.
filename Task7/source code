@@ -1,1 +1,40 @@
 
+#include <stdio.h>
+
+int main(void)
+{
+    int a = 5;
+    int b = 2;
+
+    float result1;
+    float result2;
+    double result3;
+
+    /* Integer division */
+    result1 = a / b;
+
+    /* Explicit type conversion */
+    result2 = (float)a / b;
+
+    /* Double precision calculation */
+    result3 = (double)a / b;
+
+    printf("Integer division result: %.2f\n", result1);
+    printf("Float division result: %.2f\n", result2);
+    printf("Double division result: %.2lf\n", result3);
+
+    /* Demonstrating money calculation */
+    int units = 150;
+    int rate_paise = 225;
+
+    long total_paise = (long)units * rate_paise;
+
+    printf("\nUnits consumed: %d\n", units);
+    printf("Rate per unit: %d paise\n", rate_paise);
+    printf("Energy charge: Rs %ld.%02ld\n",
+           total_paise / 100,
+           total_paise % 100);
+
+    return 0;
+}
+
