@@ -1,1 +1,24 @@
 
+#include <stdio.h>
+
+#define FIXED_CHARGE 50
+
+int main(void)
+{
+    int units = 150;
+    float rate = 2.25f;
+
+    float energy_charge = units * rate;
+    float total_bill = energy_charge + FIXED_CHARGE;
+
+    printf("Electricity Billing System\n");
+    printf("--------------------------\n");
+    printf("Units consumed : %d\n", units);
+    printf("Rate per unit  : Rs %.2f\n", rate);
+    printf("Energy charge  : Rs %.2f\n", energy_charge);
+    printf("Fixed charge   : Rs %d\n", FIXED_CHARGE);
+    printf("Total bill     : Rs %.2f\n", total_bill);
+
+    return 0;
+}
+
